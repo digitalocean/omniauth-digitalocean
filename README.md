@@ -36,7 +36,7 @@ end
 
 For additional information, refer to the [OmniAuth wiki](https://github.com/intridea/omniauth/wiki).
 
-See the [example](https://github.com/digitaloceancloud/omniauth-digitalocean/blob/master/example/sinatra/config.ru) Sinatra app for full examples
+See the [example](https://github.com/digitaloceancloud/omniauth-digitalocean/blob/master/examples/sinatra/config.ru) Sinatra app for full examples
 
 Note: before running example app, please add your applicaation id and secret to ` example/config.ru ` file.
 
