@@ -7,8 +7,8 @@ Gem::Specification.new do |spec|
   spec.version       = Omniauth::Digitalocean::VERSION
   spec.authors       = ["Phillip Baker"]
   spec.email         = ["phillip@digitalocean.com"]
-  spec.summary       = %q{Oauth2 strategy for authentication via DO.}
-  spec.description   = %q{Write a longer description. Optional.}
+  spec.summary       = %q{Official OmniAuth strategy for Digitalocean}
+  spec.description   = %q{Official OmniAuth strategy for Digitalocean}
   spec.homepage      = ""
   spec.license       = "MIT"
 
