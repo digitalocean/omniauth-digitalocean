@@ -1,53 +1,35 @@
 require 'omniauth-oauth2'
-require 'multi_json'
 
 module OmniAuth
   module Strategies
-    #
-    # Authenticate to DigitalOcean via OAuth and retrieve basic user information.
-    # Usage:
-    #    use OmniAuth::Strategies::Digitalocean, 'consumerkey', 'consumersecret', :scope => 'read write', :display => 'plain'
-    #
-    class Digitalocean < OmniAuth::Strategies::OAuth2
+    class DigitalOcean < OmniAuth::Strategies::OAuth2
       AUTHENTICATION_PARAMETERS = %w(display state scope)
-      BASE_URL = "https://cloud.digitalocean.com"
 
-      option :name, :digitalocean
+      # Name of this strategy
+      option :name, 'digitalocean'
 
-      unless OmniAuth.config.test_mode
-        option :client_options, {
-          :authorize_url => "#{BASE_URL}/v1/oauth/authorize",
-          :token_url => "#{BASE_URL}/v1/oauth/token",
-          :site => BASE_URL
-        }
-      else
-        option :client_options, {
-          :authorize_url => "http://localhost:3000/v1/oauth/authorize",
-          :token_url => "http://localhost:3000/v1/oauth/token",
-          :site => "http://localhost:3000"
-        }
-      end
+      # Client options ( see https://github.com/intridea/omniauth-oauth2 )
+      option :client_options, {
+        site: 'https://api.digitalocean.com',
+        authorize_url: 'https://cloud.digitalocean.com/v1/oauth/authorize',
+        token_url: 'https://cloud.digitalocean.com/v1/oauth/token',
+      }
 
       option :authorize_options, AUTHENTICATION_PARAMETERS
 
-      uid do
-        access_token.params['uid']
-      end
+      uid { raw_info['uuid'] }
 
       info do
-        access_token.params['info']
+        {
+          droplet_limit: raw_info['droplet_limit'],
+          email: raw_info['email'],
+          uuid: raw_info['uuid'],
+          email_verified: raw_info['email_verified'],
+        }
       end
 
-      # Hook useful for appending parameters into the auth url before sending
-      # to provider.
-      def request_phase
-        super
-      end
-
-      # Hook used after response with code from provider. Used to prep token
-      # request from provider.
-      def callback_phase
-        super
+      def raw_info
+        @raw_info ||= access_token.get('v2/account').parsed['account']
       end
 
       ##
@@ -64,7 +46,8 @@ module OmniAuth
           end
         end
       end
-
     end
   end
 end
+
+OmniAuth.config.add_camelization 'digitalocean', 'DigitalOcean'
