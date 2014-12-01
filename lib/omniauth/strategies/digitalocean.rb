@@ -1,5 +1,4 @@
 require 'omniauth-oauth2'
-require 'multi_json'
 
 module OmniAuth
   module Strategies
@@ -12,6 +11,7 @@ module OmniAuth
       AUTHENTICATION_PARAMETERS = %w(display state scope)
       BASE_URL = "https://cloud.digitalocean.com"
 
+      # Name of this strategy
       option :name, :digitalocean
 
       unless OmniAuth.config.test_mode
@@ -38,6 +38,10 @@ module OmniAuth
         access_token.params['info']
       end
 
+      extra do
+        raw_info.parsed['account']
+      end
+
       # Hook useful for appending parameters into the auth url before sending
       # to provider.
       def request_phase
@@ -48,6 +52,13 @@ module OmniAuth
       # request from provider.
       def callback_phase
         super
+      end
+
+      #
+      # Retrieves the information about the user
+      #
+      def raw_info
+        @raw_info ||= access_token.get('v2/account')
       end
 
       ##
