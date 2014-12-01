@@ -2,6 +2,11 @@ require 'omniauth-oauth2'
 
 module OmniAuth
   module Strategies
+    #
+    # Authenticate to DigitalOcean via OAuth and retrieve basic user information.
+    # Usage:
+    #    use OmniAuth::Strategies::Digitalocean, 'consumerkey', 'consumersecret', :scope => 'read write', :display => 'plain'
+    #
     class DigitalOcean < OmniAuth::Strategies::OAuth2
       AUTHENTICATION_PARAMETERS = %w(display state scope)
 
@@ -28,6 +33,9 @@ module OmniAuth
         }
       end
 
+      ##
+      # Retrieves the information about the user
+      #
       def raw_info
         @raw_info ||= access_token.get('v2/account').parsed['account']
       end
