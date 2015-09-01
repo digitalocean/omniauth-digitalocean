@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe OmniAuth::Strategies::DigitalOcean do
+describe OmniAuth::Strategies::Digitalocean do
   subject do
-    OmniAuth::Strategies::DigitalOcean.new({})
+    described_class.new({})
   end
 
   context "client options" do
