@@ -31,7 +31,7 @@ module OmniAuth
       option :authorize_options, AUTHENTICATION_PARAMETERS
 
       uid do
-        access_token.params['uid']
+        access_token.params['info']['uuid']
       end
 
       info do
