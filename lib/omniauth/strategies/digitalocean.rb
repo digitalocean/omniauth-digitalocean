@@ -38,6 +38,14 @@ module OmniAuth
         access_token.params['info']
       end
 
+      # Over-ride callback_url definition to maintain
+      # compatability with omniauth-oauth2 >= 1.4.0
+      #
+      # See: https://github.com/intridea/omniauth-oauth2/issues/81
+      def callback_url
+        full_host + script_name + callback_path
+      end
+
       # Hook useful for appending parameters into the auth url before sending
       # to provider.
       def request_phase
