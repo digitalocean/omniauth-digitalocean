@@ -38,7 +38,7 @@ For additional information, refer to the [OmniAuth wiki](https://github.com/intr
 
 See the [example](https://github.com/digitaloceancloud/omniauth-digitalocean/blob/master/examples/sinatra/config.ru) Sinatra app for full examples
 
-Note: before running example app, please add your applicaation id and secret to ` example/config.ru ` file.
+Note: before running example app, please add your application id and secret to ` example/config.ru ` file.
 
 ## License
 
