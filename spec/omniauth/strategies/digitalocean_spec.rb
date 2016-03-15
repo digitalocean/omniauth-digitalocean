@@ -6,7 +6,7 @@ describe OmniAuth::Strategies::Digitalocean do
   end
 
   describe "production client options" do
-    it { expect(subject.options.name).to eq(:digitalocean) }
+    it { expect(subject.options.name).to eq("digitalocean") }
 
     it { expect(subject.options.client_options.site).to eq("https://cloud.digitalocean.com") }
     it { expect(subject.options.client_options.authorize_url).to eq("https://cloud.digitalocean.com/v1/oauth/authorize") }
