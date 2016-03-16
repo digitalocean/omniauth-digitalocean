@@ -12,7 +12,7 @@ module OmniAuth
       AUTHENTICATION_PARAMETERS = %w(display state scope)
       BASE_URL = "https://cloud.digitalocean.com"
 
-      option :name, :digitalocean
+      option :name, "digitalocean"
 
       unless OmniAuth.config.test_mode
         option :client_options, {
