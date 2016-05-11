@@ -9,7 +9,7 @@ module OmniAuth
     #    use OmniAuth::Strategies::Digitalocean, 'consumerkey', 'consumersecret', :scope => 'read write', :display => 'plain'
     #
     class Digitalocean < OmniAuth::Strategies::OAuth2
-      AUTHENTICATION_PARAMETERS = %w(display state scope)
+      AUTHENTICATION_PARAMETERS = %w(display account state scope)
       BASE_URL = "https://cloud.digitalocean.com"
 
       option :name, "digitalocean"
