@@ -11,6 +11,7 @@ module OmniAuth
     class Digitalocean < OmniAuth::Strategies::OAuth2
       AUTHENTICATION_PARAMETERS = %w(display account state scope)
       BASE_URL = "https://cloud.digitalocean.com"
+      API_URL = "https://api.digitalocean.com"
 
       option :name, "digitalocean"
 
@@ -29,6 +30,10 @@ module OmniAuth
       end
 
       option :authorize_options, AUTHENTICATION_PARAMETERS
+
+      extra do
+        raw_info.parsed['account']
+      end
 
       uid do
         access_token.params['info']['uuid']
@@ -56,6 +61,10 @@ module OmniAuth
       # request from provider.
       def callback_phase
         super
+      end
+
+      def raw_info
+        @raw_info ||= access_token.get("#{API_URL}/v2/account")
       end
 
       ##
