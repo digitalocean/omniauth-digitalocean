@@ -5,11 +5,11 @@ require 'omniauth-digitalocean/version'
 Gem::Specification.new do |spec|
   spec.name          = "omniauth-digitalocean"
   spec.version       = Omniauth::Digitalocean::VERSION
-  spec.authors       = ["Phillip Baker"]
-  spec.email         = ["phillip@digitalocean.com"]
+  spec.authors       = ["DigitalOcean API Engineering team"]
+  spec.email         = ["api-engineering@digitalocean.com"]
   spec.summary       = %q{Official OmniAuth strategy for Digitalocean}
   spec.description   = %q{Official OmniAuth strategy for Digitalocean}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/digitalocean/omniauth-digitalocean"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
