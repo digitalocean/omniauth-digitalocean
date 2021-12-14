@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'sinatra'
-gem 'omniauth'
+gem 'omniauth', '~> 2.0'
 gem 'omniauth-digitalocean', :path => '../../'
 gem 'multi_json'

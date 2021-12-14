@@ -7,7 +7,12 @@ class DigitalOceanExample < Sinatra::Base
   use Rack::Session::Cookie
 
   get '/' do
-    redirect '/auth/digitalocean'
+    <<~HTML
+      <form method='post' action='/auth/digitalocean'>
+        <input type="hidden" name="authenticity_token" value='#{request.env["rack.session"]["csrf"]}'>
+        <button type='submit'>Login with DigitalOcean</button>
+      </form>
+    HTML
   end
 
   get '/auth/:provider/callback' do
