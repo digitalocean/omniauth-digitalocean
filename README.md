@@ -32,13 +32,37 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 end
 ```
 
-- The scope needs to be separated by space and not comma: "public redeploy" instead of "public,redeploy" !
+- The scope needs to be separated by space and not comma: "read write" instead of "read,write" !
 
 For additional information, refer to the [OmniAuth wiki](https://github.com/intridea/omniauth/wiki).
 
 See the [example](https://github.com/digitaloceancloud/omniauth-digitalocean/blob/master/examples/sinatra/config.ru) Sinatra app for full examples
 
-Note: before running example app, please add your application id and secret to ` example/config.ru ` file.
+## Auth Hash Schema
+
+The following information is provided in the auth hash accessible to the callback at `request.env["omniauth.auth"]`:
+
+* `provider` - The OmniAuth provider, i.e. `digitalocean`
+* `uid` - The UUID of the authenticating user
+* `info` - A hash containing information about the user
+  * `uuid` - The UUID of the authenticating user
+  * `name` - The user's display name
+  * `email` - The e-mail of the authenticating user
+  * `team_uuid` - The UUID of the team when authenticated in a team context
+  * `team_name` - The team's display name when authenticated in a team context
+* `credentials` - A hash containing authentication information
+  * `token` - The DigitalOcean OAuth access token
+  * `refresh_token` - A refresh token that can be exchanged for a new OAuth access token
+  * `expires` - Boolean indicating whether the access token has an expiry date
+  * `expires_at` - Timestamp of the expiry time
+* `extra` - Contains extra information returned from the `/v2/account` endpoint of the DigitalOcean API.
+  * `droplet_limit` - The total number of Droplets current user or team may have active at one time
+  * `floating_ip_limit`  - The total number of Floating IPs the current user or team may have
+  * `email` - The email address for the current user
+  * `uuid` - The UUID for the current user.
+  * `email_verified` - If true, the user has verified their account via email
+  * `status` - This value is one of `active`, `warning`, or `locked`
+  * `status_message` - A human-readable message giving more details about the status of the account
 
 ## License
 
