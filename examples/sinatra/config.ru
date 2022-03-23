@@ -16,8 +16,13 @@ class DigitalOceanExample < Sinatra::Base
   end
 
   get '/auth/:provider/callback' do
-    content_type 'text/plain'
-    request.env['omniauth.auth'].to_hash.inspect rescue "No Data"
+    auth = request.env["omniauth.auth"]
+    <<~HTML
+      <b>User:</b> #{auth['info']['name']}<br/>
+      <b>Team:</b> #{auth['info']['team_name']}<br/>
+      <b>Full response:</b><br/>
+      <pre>#{JSON.pretty_generate(auth)}</pre>
+    HTML
   end
 
   get '/auth/failure' do
