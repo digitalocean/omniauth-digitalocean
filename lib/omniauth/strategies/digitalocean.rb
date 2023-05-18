@@ -19,13 +19,15 @@ module OmniAuth
         option :client_options, {
           :authorize_url => "#{BASE_URL}/v1/oauth/authorize",
           :token_url => "#{BASE_URL}/v1/oauth/token",
-          :site => BASE_URL
+          :site => BASE_URL,
+          :auth_scheme => :request_body
         }
       else
         option :client_options, {
           :authorize_url => "http://localhost:3000/v1/oauth/authorize",
           :token_url => "http://localhost:3000/v1/oauth/token",
-          :site => "http://localhost:3000"
+          :site => "http://localhost:3000",
+          :auth_scheme => :request_body
         }
       end
 
